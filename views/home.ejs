@@ -1,0 +1,24 @@
+<%- include('partials/navbar') %>
+<h1>Welcome, <%= username %>!</h1>
+
+<h2>Add Quote</h2>
+<form class="addform" action="/addquote" method="post">
+    <input type="text" name="quote" placeholder="Enter quote text" maxlength="100" required>
+    <button type="submit">Add Quote</button>
+  </form>
+<br>
+<h2>Your Quotes</h2>
+<ul class="quote-list">
+    <% quotes.forEach(quote => { %>
+      <li class="quote-item">
+        <span class="quote-author"><%= quote.author %> - </span>
+        <span class="quote-content"><%= quote.content %></span>
+      </li>
+    <% }); %>
+  </ul>
+  
+
+
+  
+
+

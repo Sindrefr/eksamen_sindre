@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quotes</title>
+  <link rel="stylesheet" type="text/css" href="/styles.css">
+
+</head>
+<nav class="navbar">
+    <div class="navbar-left">
+      <a href="/">
+        QuoteBook
+      </a>
+    </div>
+    <div class="navbar-middle">
+      <% if (isLoggedIn) { %>
+        <span>Quotes - <%= username %></span>
+      <% } else { %>
+        <span>Quotes</span>
+      <% } %>
+    </div>
+    <div class="navbar-right">
+      <% if (isLoggedIn) { %>
+        <a href="/logout">Log out</a>
+      <% } else { %>
+        <a href="/login">Log in</a>
+      <% } %>
+    </div>
+  </nav>
+  
