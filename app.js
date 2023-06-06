@@ -1,5 +1,5 @@
 const express = require('express');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const app = express();
 require('dotenv').config();
 const session = require('express-session');
@@ -117,7 +117,7 @@ app.post('/addquote', (req, res) => {
   const username = req.session.username;
   const quote = req.body.quote;
 
-  // Oppretter en ny quote-dokument
+  // Oppretter et nytt quote-dokument
   const newQuote = {
     author: username,
     content: quote
@@ -126,6 +126,42 @@ app.post('/addquote', (req, res) => {
   // Legger til den nye quoten i quotes-samlingen
   quotesCollection.insertOne(newQuote)
     .then(() => {
+      res.redirect(`/home/${username}`);
+    });
+});
+
+// Oppdatere quotes
+app.post('/updatequote/:quoteId', (req, res) => {
+  const quoteId = req.params.quoteId;
+  const username = req.session.username;
+  const updatedQuote = req.body.updatedQuote;
+
+  // Oppdaterer quoten i quotes-samlingen
+  quotesCollection.updateOne(
+    { _id: new ObjectId(quoteId), author: username },
+    { $set: { content: updatedQuote } }
+  )
+    .then(() => {
+      res.redirect(`/home/${username}`);
+    })
+    .catch(err => {
+      console.log('Error updating quote:', err);
+      res.redirect(`/home/${username}`);
+    });
+});
+
+// Rute for å slette en quote
+app.post('/deletequote/:quoteId', (req, res) => {
+  const quoteId = req.params.quoteId;
+  const username = req.session.username;
+
+  // Sletter quoten fra quotes-samlingen
+  quotesCollection.deleteOne({ _id: new ObjectId(quoteId), author: username })
+    .then(() => {
+      res.redirect(`/home/${username}`);
+    })
+    .catch(err => {
+      console.log('Error deleting quote:', err);
       res.redirect(`/home/${username}`);
     });
 });
@@ -158,4 +194,6 @@ app.get('/', (req, res) => {
 });
 
 // Lytter på port 3000
-app.listen(3000, () => console.log('Lytter på port 3000'));
+const port = 3000;
+
+app.listen(port, () => console.log('Lytter på port', port));
