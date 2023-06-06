@@ -1,8 +1,15 @@
 <%- include('partials/navbar') %>
-<h1>Quotes by <%= author %></h1>
+  <h1>Quotes by <%= author %>
+  </h1>
 
-<ul>
-  <% quotes.forEach(quote => { %>
-    <li><%= quote.content %></li>
-  <% }); %>
-</ul>
+  <ul class="quote-list">
+    <% quotes.forEach(quote=> { %>
+      <li class="quote-item">
+        <span class="quote-author">
+          <%= quote.author %> -
+        </span>
+        <span class="quote-content">
+          <%= quote.content %>
+        </span>
+      </li>
+      <% }); %>

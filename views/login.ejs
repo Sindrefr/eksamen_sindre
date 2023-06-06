@@ -1,7 +1,7 @@
 <%- include('partials/navbar') %>
 
   <h1>Login</h1>
-  <form class = form action="/login" method="post">
+  <form class=form action="/login" method="post">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required>
     <br>
@@ -9,8 +9,11 @@
     <input type="password" id="password" name="password" required>
     <br>
     <input type="submit" value="Login">
-    <div id="feedback"><%= feedback %></div>
+    <div id="feedback">
+      <%= feedback %>
+    </div>
   </form>
 
-  <a href="signup"><h2>Would you rather sign up? Click here</h2></a>
-  
+  <a href="signup">
+    <h2>Would you rather sign up? Click here</h2>
+  </a>
