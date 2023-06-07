@@ -150,22 +150,6 @@ app.post('/updatequote/:quoteId', (req, res) => {
     });
 });
 
-// Rute for å slette en quote
-app.post('/deletequote/:quoteId', (req, res) => {
-  const quoteId = req.params.quoteId;
-  const username = req.session.username;
-
-  // Sletter quoten fra quotes-samlingen
-  quotesCollection.deleteOne({ _id: new ObjectId(quoteId), author: username })
-    .then(() => {
-      res.redirect(`/home/${username}`);
-    })
-    .catch(err => {
-      console.log('Error deleting quote:', err);
-      res.redirect(`/home/${username}`);
-    });
-});
-
 // Rute for å vise quotene til en spesifikk forfatter
 app.get('/author/:author', (req, res) => {
   const author = req.params.author;

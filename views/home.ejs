@@ -18,12 +18,9 @@
       <span class="quote-content">
         <%= quote.content %>
       </span>
-      <form class="update-form" action="/updatequote/<%= quote._id %>" method="post">
-        <input type="text" name="updatedQuote" placeholder="Enter updated quote" maxlength="100" required>
+      <form class="edit-form" action="/updatequote/<%= quote._id %>" method="post">
+        <input type="text" name="updatedQuote" value="<%= quote.content %>" maxlength="100" required>
         <button type="submit">Update</button>
-      </form>
-      <form class="delete-form" action="/deletequote/<%= quote._id %>" method="post">
-        <button type="submit">Delete</button>
       </form>
     </li>
   <% }); %>
