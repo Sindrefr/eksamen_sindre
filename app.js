@@ -42,7 +42,7 @@ function requireAuth(req, res, next) {
       next();
     } else {
       // Hvis brukeren prøver å få tilgang til en annen brukers side
-      res.sendStatus(403); // Returnerer forbudt status
+      res.sendStatus(403); // Returnerer forbidden status
     }
   } else {
     // Bruker er ikke autentisert
@@ -148,6 +148,11 @@ app.post('/updatequote/:quoteId', (req, res) => {
       console.log('Error updating quote:', err);
       res.redirect(`/home/${username}`);
     });
+});
+
+// Rute til veilederen
+app.get('/veileder', (req, res) => {
+  res.render('veileder');
 });
 
 // Rute for å vise quotene til en spesifikk forfatter
